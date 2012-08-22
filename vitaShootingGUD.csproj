@@ -34,9 +34,22 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Sce.PlayStation.Core" />
+    <Reference Include="Sce.PlayStation.HighLevel.GameEngine2D" />
+    <Reference Include="Sce.PlayStation.HighLevel.UI" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMain.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Entity\BulletEntity.cs" />
+    <Compile Include="Entity\GameEntity.cs" />
+    <Compile Include="Entity\ShipEntity.cs" />
+    <Compile Include="Entity\Player.cs" />
+    <Compile Include="Entity\Boss.cs" />
+    <Compile Include="Entity\BossBullet.cs" />
+    <Compile Include="Entity\BackGround.cs" />
+    <Compile Include="UIOptionDialog.composer.cs" />
+    <Compile Include="UIOptionDialog.cs" />
+    <Compile Include="Entity\PlayerBulletDefault.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -46,4 +59,17 @@
     <PsmMetadata Include="app.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Entity\" />
+    <Folder Include="Util\" />
+    <Folder Include="assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\background.png" />
+    <Content Include="assets\boss.png" />
+    <Content Include="assets\bossbullet.png" />
+    <Content Include="assets\myship.png" />
+    <Content Include="assets\IndieFlower.ttf" />
+    <Content Include="assets\mybulletdefault.png" />
+  </ItemGroup>
 </Project>
