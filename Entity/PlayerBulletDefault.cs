@@ -16,7 +16,9 @@ namespace vitaShootingGUD
 	public class PlayerBulletDefault : BulletEntity
 	{
 		static string path = "/Application/assets/mybulletdefault.png";
-		public PlayerBulletDefault (Vector2 pos):base(pos,path){}
+		public PlayerBulletDefault (Vector2 pos):base(pos,path)
+		{
+		}
 		
 		/// <summary>
 		/// 定期的な処理.

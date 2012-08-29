@@ -27,7 +27,12 @@ namespace vitaShootingGUD
 		//自機
 		public Player Player{get;set;}
 		//自機画像path
-		public string playerGraphic ="/Application/assets/myship.png";
+		public string playerGraphic =@"/Application/assets/myship.png";
+		
+		//敵機
+		public Boss Boss{get;set;}
+		//敵画像path
+		public string bossGraphic = @"/Application/assets/boss.png";
 		
 		public Vector2i ScreenSize{get;set;}
 		
@@ -57,6 +62,9 @@ namespace vitaShootingGUD
 			//自機登録･･･(初期位置,自機画像path)で自機ノードを作成してworldに登録
 			Player = new Player(new Vector2(50,Game.Instance.ScreenSize.Y/2),playerGraphic);
 			World.AddChild(Player);
+			
+			Boss = new Boss(new Vector2(Game.Instance.ScreenSize.X-Game.Instance.ScreenSize.X/8,0),bossGraphic);
+			World.AddChild (Boss);
 		}
 		
 		//定期的なアップデート処理･･･AppMainから呼ばれる

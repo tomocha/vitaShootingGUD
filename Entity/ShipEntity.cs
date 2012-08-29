@@ -13,15 +13,18 @@ namespace vitaShootingGUD
 	//自機・敵機の基底クラス
 	public class ShipEntity : GameEntity
 	{
-		public ShipEntity(){}
+		public TextureInfo texture_info;
+		public ShipEntity(){
+			
+		}
 		public ShipEntity(Vector2 pos,string path)
 		{
+			//スプライト生成
+			texture_info = new TextureInfo(new Texture2D(path,false),new Vector2i(1,1));
+			Sprite = createSprite (texture_info);
+			
 			//座標設定
 			this.Position = pos;
-			
-			//スプライト生成
-			var texture_info = new TextureInfo(new Texture2D(path,false),new Vector2i(1,1));
-			Sprite = createSprite (texture_info);
 			
 			//スプライトをNodeに追加する
 			this.AddChild(Sprite);

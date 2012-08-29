@@ -12,6 +12,8 @@ namespace vitaShootingGUD
 {
 	public class GameEntity : Node
 	{
+		//frame
+		public int FrameCount{ get;set;}
 		public SpriteTile Sprite {get; set;}
 		public GameEntity()
 		{
@@ -41,6 +43,7 @@ namespace vitaShootingGUD
 		//Tick
 		public virtual void Tick(float dt)
 		{
+			FrameCount++;
 		}
 	}
 }

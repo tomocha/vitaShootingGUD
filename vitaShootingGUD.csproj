@@ -45,11 +45,11 @@
     <Compile Include="Entity\ShipEntity.cs" />
     <Compile Include="Entity\Player.cs" />
     <Compile Include="Entity\Boss.cs" />
-    <Compile Include="Entity\BossBullet.cs" />
     <Compile Include="Entity\BackGround.cs" />
     <Compile Include="UIOptionDialog.composer.cs" />
     <Compile Include="UIOptionDialog.cs" />
     <Compile Include="Entity\PlayerBulletDefault.cs" />
+    <Compile Include="Entity\BossBullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

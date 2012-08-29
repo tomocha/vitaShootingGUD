@@ -28,6 +28,17 @@ namespace vitaShootingGUD
 			//スプライトをNodeに追加する
 			this.AddChild(Sprite);
 		}
+		public BulletEntity(Vector2 pos,string path,float scale)
+		{
+			//座標設定
+			this.Position = pos;
+			
+			//スプライト生成
+			var texture_info = new TextureInfo(new Texture2D(path,false),new Vector2i(1,1));
+			Sprite = createSprite (texture_info,scale);
+			
+			//スプライトをNodeに追加する
+			this.AddChild(Sprite);
+		}
 	}
 }
-
