@@ -22,7 +22,9 @@ namespace vitaShootingGUD
 		
 		//キュー
 		public List<BulletEntity> AddQueue{get;set;}
-		public List<BulletEntity> RemoveQueue{get;set;}
+		public List<BulletEntity> RemoveQueue{get;set;}		
+		
+		public HitTest HitTest{get;set;}
 		
 		//自機
 		public Player Player{get;set;}
@@ -35,6 +37,7 @@ namespace vitaShootingGUD
 		public string bossGraphic = @"/Application/assets/boss.png";
 		
 		public Vector2i ScreenSize{get;set;}
+		
 		
 		//初期化 ･･･AppMainから呼ばれる
 		public void Initialize()
@@ -59,16 +62,22 @@ namespace vitaShootingGUD
 			AddQueue = new List<BulletEntity>();
 			RemoveQueue = new List<BulletEntity>();
 			
-			//自機登録･･･(初期位置,自機画像path)で自機ノードを作成してworldに登録
-			Player = new Player(new Vector2(50,Game.Instance.ScreenSize.Y/2),playerGraphic);
-			World.AddChild(Player);
+			HitTest = new HitTest();
 			
+			//敵機登録
 			Boss = new Boss(new Vector2(Game.Instance.ScreenSize.X-Game.Instance.ScreenSize.X/8,0),bossGraphic);
 			World.AddChild (Boss);
+			
+			//自機登録･･･(初期位置,自機画像path)で自機ノードを作成してworldに登録
+			Player = new Player(new Vector2(50,Game.Instance.ScreenSize.Y/2),playerGraphic);
+			World.AddChild(Player);	
+
 		}
 		
 		//定期的なアップデート処理･･･AppMainから呼ばれる
 		public void FrameUpdate(){
+			//当たり判定
+			HitTest.Collide ();
 			//削除キューにある弾をWorldから取り除く
 			foreach(BulletEntity e in RemoveQueue)
 			{

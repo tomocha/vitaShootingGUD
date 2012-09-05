@@ -40,7 +40,6 @@
   <ItemGroup>
     <Compile Include="AppMain.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Entity\BulletEntity.cs" />
     <Compile Include="Entity\GameEntity.cs" />
     <Compile Include="Entity\ShipEntity.cs" />
     <Compile Include="Entity\Player.cs" />
@@ -49,7 +48,12 @@
     <Compile Include="UIOptionDialog.composer.cs" />
     <Compile Include="UIOptionDialog.cs" />
     <Compile Include="Entity\PlayerBulletDefault.cs" />
-    <Compile Include="Entity\BossBullet.cs" />
+    <Compile Include="Entity\BossBulletKi.cs" />
+    <Compile Include="Entity\BossBulletGu.cs" />
+    <Compile Include="Util\Const.cs" />
+    <Compile Include="Entity\BulletFactory.cs" />
+    <Compile Include="Entity\BulletEntity.cs" />
+    <Compile Include="Entity\HitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -67,9 +71,12 @@
   <ItemGroup>
     <Content Include="assets\background.png" />
     <Content Include="assets\boss.png" />
-    <Content Include="assets\bossbullet.png" />
+    <Content Include="assets\bossbullet.png">
+      <DeployService-Deploy>true</DeployService-Deploy>
+    </Content>
     <Content Include="assets\myship.png" />
     <Content Include="assets\IndieFlower.ttf" />
     <Content Include="assets\mybulletdefault.png" />
+    <Content Include="assets\bossbulletgu.png" />
   </ItemGroup>
 </Project>

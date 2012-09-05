@@ -15,6 +15,18 @@ namespace vitaShootingGUD
 		//frame
 		public int FrameCount{ get;set;}
 		public SpriteTile Sprite {get; set;}
+		public SpriteList SpriteList{get;set;}
+		
+		public List<HitTest.CollisionEntry> CollisionDatas;
+		
+		public static Vector2 GetCollisionCenter (Node node)
+		{
+			Bounds2 bounds = new Bounds2 ();
+			node.GetlContentLocalBounds (ref bounds);
+			Vector2 center = node.LocalToWorld (bounds.Center);
+			return center;
+		}
+		
 		public GameEntity()
 		{
 			Scheduler.Instance.Schedule(this,Tick,0.0f,false);
@@ -43,7 +55,17 @@ namespace vitaShootingGUD
 		//Tick
 		public virtual void Tick(float dt)
 		{
+			//foreach(HitTest.CollisionEntry c in CollisionDatas)
+			//{
+			//	if(c.owner != null)
+			//	{
+			//		Game.Instance.HitTest.Add(c);
+			//	}
+			//}
 			FrameCount++;
+		}
+		public virtual void Hit (GameEntity owner)
+		{
 		}
 	}
 }

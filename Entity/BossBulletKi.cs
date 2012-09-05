@@ -11,27 +11,23 @@ namespace vitaShootingGUD
 	/// <summary>
 	/// 奇数弾クラス.
 	/// </summary>
-	public class BossBullet : BulletEntity
+	public class BossBulletKi : BulletEntity
 	{
-		//傾き設定
-		Vector2 velocity;
-		
-		//画像ファイルパス
-		static string path = "/Application/assets/bossbullet.png";
-		public BossBullet (Vector2 pos,Vector2 velocity):base(pos,path,1.0f)
+		public BossBulletKi():base(Const.BOSS_BULLET_KI_PATH,1.0f){}
+		public BossBulletKi (Vector2 pos,Vector2 velocity):base(pos,Const.BOSS_BULLET_KI_PATH,1.0f)
 		{
-			this.velocity = velocity;
+			this.Velocity = velocity;
 		}
 		
 		public override void Tick(float dt)
 		{
 			base.Tick(dt);
 			var pos = this.Position;
-			pos.X -= velocity.X * dt;
-			pos.Y -= velocity.Y * dt;
+			pos.X -= Velocity.X * dt;
+			pos.Y -= Velocity.Y * dt;
 			this.Position = pos;
 			//画面の外に出たら消す
-			if(pos.X <0)
+			if(isRemovePosition(pos))
 			{
 				this.RemoveChild(Sprite,true);
 				Game.Instance.RemoveQueue.Add(this);
