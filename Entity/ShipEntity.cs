@@ -17,7 +17,7 @@ namespace vitaShootingGUD
 		public ShipEntity(){
 			
 		}
-		public ShipEntity(Vector2 pos,string path)
+		public ShipEntity(Vector2 pos,string path,float radius)
 		{
 			//スプライト生成
 			texture_info = new TextureInfo(new Texture2D(path,false),new Vector2i(1,1));
@@ -28,8 +28,31 @@ namespace vitaShootingGUD
 			
 			//スプライトをNodeに追加する
 			this.AddChild(Sprite);
+			
+			//当たり判定に追加する
+			CollisionDatas.Add(new HitTest.CollisionEntry(){
+				type = checkEntityType(this),
+				owner = this,
+				center = () => GetCollisionCenter(Sprite),
+				radius = () => radius
+			});
 		}
-		//TODO:HPとかのいんたーふぇいす
+		
+		//bulletEntity判定
+		protected HitTest.CollisionEntityType checkEntityType(ShipEntity entity)
+		{
+			HitTest.CollisionEntityType checkedType = HitTest.CollisionEntityType.Player;
+			if(this is Player)
+			{
+				checkedType = HitTest.CollisionEntityType.Player;
+			}
+			if(this is Boss)
+			{
+				checkedType = HitTest.CollisionEntityType.Boss;
+			}
+			return checkedType;
+		}
+		
 	}
 }
 

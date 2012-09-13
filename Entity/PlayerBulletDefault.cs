@@ -15,7 +15,7 @@ namespace vitaShootingGUD
 	/// </summary>
 	public class PlayerBulletDefault : BulletEntity
 	{
-		public PlayerBulletDefault (Vector2 pos):base(pos,Const.PLAYER_BYLLET_DEFAULT_PATH)
+		public PlayerBulletDefault (Vector2 pos):base(pos,Const.PLAYER_BYLLET_DEFAULT_PATH,1.0f,5.0f)
 		{
 		}
 		
@@ -27,7 +27,7 @@ namespace vitaShootingGUD
 		/// </param>
 		public override void Tick(float dt)
 		{
-			const float speed = 3000;
+			const float speed = 3000f;
 			base.Tick(dt);
 			var pos = this.Position;
 			pos.X += speed * dt;

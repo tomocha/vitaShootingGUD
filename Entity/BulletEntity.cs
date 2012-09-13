@@ -37,7 +37,7 @@ namespace vitaShootingGUD
 			//スプライトをNodeに追加する
 			this.AddChild(Sprite);
 		}
-		public BulletEntity(Vector2 pos,string path,float scale)
+		public BulletEntity(Vector2 pos,string path,float scale,float radius)
 		{
 			//座標設定
 			this.Position = pos;
@@ -48,6 +48,14 @@ namespace vitaShootingGUD
 			
 			//スプライトをNodeに追加する
 			this.AddChild(Sprite);
+			
+			//当たり判定に追加する
+			CollisionDatas.Add(new HitTest.CollisionEntry(){
+				type = checkEntityType(this),
+				owner = this,
+				center = () => GetCollisionCenter(Sprite),
+				radius = () => radius
+			});
 		}
 		
 		/// <summary>
@@ -61,10 +69,25 @@ namespace vitaShootingGUD
 		/// </param>
 		protected bool isRemovePosition(Vector2 pos)
 		{
-			return(pos.X < 0 ||
-			   pos.X > Game.Instance.ScreenSize.X ||
-			   pos.Y < 0 ||
-			   pos.Y > Game.Instance.ScreenSize.Y);
+			return(pos.X + Sprite.TextureInfo.TextureSizef.X/2 < 0 ||
+			   pos.X - Sprite.TextureInfo.TextureSizef.X/2 > Game.Instance.ScreenSize.X ||
+			   pos.Y + Sprite.TextureInfo.TextureSizef.Y/2 < 0 ||
+			   pos.Y - Sprite.TextureInfo.TextureSizef.Y/2 > Game.Instance.ScreenSize.Y);
+		}
+		
+		//bulletEntity判定
+		protected HitTest.CollisionEntityType checkEntityType(BulletEntity entity)
+		{
+			HitTest.CollisionEntityType checkedType = HitTest.CollisionEntityType.PlayerBullet;
+			if(this is PlayerBulletDefault)
+			{
+				checkedType = HitTest.CollisionEntityType.PlayerBullet;
+			}
+			if(this is BossBulletKi || this is BossBulletGu)
+			{
+				checkedType = HitTest.CollisionEntityType.BossBullet;
+			}
+			return checkedType;
 		}
 	}
 }

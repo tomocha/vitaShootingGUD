@@ -12,7 +12,7 @@ namespace vitaShootingGUD
 	{	
 		enum POWER{ONE,TWO,THREE}
 		POWER playerPower;
-		public Player(Vector2 pos,string path) : base(pos,path)
+		public Player(Vector2 pos,string path) : base(pos,path,24.0f)
 		{
 			playerPower = POWER.ONE;
 		}
@@ -101,6 +101,26 @@ namespace vitaShootingGUD
 				break;
 			}
 			Game.Instance.AddQueue.Add (bullet);
+		}
+		
+		/// <summary>
+		/// プレイヤーへのヒット判定
+		/// </summary>
+		/// <param name='owner'>
+		/// Owner.
+		/// </param>
+		public override void Hit (GameEntity owner)
+		{
+			base.Hit (owner);
+			
+			//ボスの弾が当たった場合
+			if(owner is BossBulletGu || owner is BossBulletKi)
+			{
+				this.RemoveChild(owner.Sprite,true);
+				Game.Instance.RemoveQueue.Add((BulletEntity)owner);
+				
+				Game.Instance.HpBar.PlayerHp -= 0.05f;
+			}
 		}
 	}
 }

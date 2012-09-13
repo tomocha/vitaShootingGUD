@@ -16,7 +16,7 @@ namespace vitaShootingGUD
 		//傾き設定
 		Vector2 velocity;
 		
-		public BossBulletGu (Vector2 pos,Vector2 velocity):base(pos,Const.BOSS_BULLET_GU_PATH,5.0f)
+		public BossBulletGu (Vector2 pos,Vector2 velocity):base(pos,Const.BOSS_BULLET_GU_PATH,5.0f,50.0f)
 		{
 			this.velocity = velocity;
 		}

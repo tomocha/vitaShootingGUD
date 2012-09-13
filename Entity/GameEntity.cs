@@ -13,7 +13,7 @@ namespace vitaShootingGUD
 	public class GameEntity : Node
 	{
 		//frame
-		public int FrameCount{ get;set;}
+		public float FrameCount{ get;set;}
 		public SpriteTile Sprite {get; set;}
 		public SpriteList SpriteList{get;set;}
 		
@@ -30,6 +30,7 @@ namespace vitaShootingGUD
 		public GameEntity()
 		{
 			Scheduler.Instance.Schedule(this,Tick,0.0f,false);
+			CollisionDatas = new List<HitTest.CollisionEntry>();
 		}
 		
 		public virtual SpriteTile createSprite(TextureInfo texture_info, float world_scale=1.5f)
@@ -55,15 +56,16 @@ namespace vitaShootingGUD
 		//Tick
 		public virtual void Tick(float dt)
 		{
-			//foreach(HitTest.CollisionEntry c in CollisionDatas)
-			//{
-			//	if(c.owner != null)
-			//	{
-			//		Game.Instance.HitTest.Add(c);
-			//	}
-			//}
-			FrameCount++;
+			foreach(HitTest.CollisionEntry c in CollisionDatas)
+			{
+				if(c.owner != null)
+				{
+					Game.Instance.HitTest.Add(c);
+				}
+			}
+			FrameCount += 1.0f;
 		}
+		
 		public virtual void Hit (GameEntity owner)
 		{
 		}

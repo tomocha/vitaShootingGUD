@@ -8,6 +8,8 @@ using Sce.PlayStation.Core.Input;
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
+using Sce.PlayStation.HighLevel.UI;
+
 namespace vitaShootingGUD
 {
 /// <summary>
@@ -41,8 +43,9 @@ namespace vitaShootingGUD
 			
 			// Gameインスタンスの作成・初期化
 			Game.Instance = new Game();
-			Game.Instance.Initialize();
+			Game.Instance.Initialize();	
 			
+			UISystem.Initialize(graphics);
 		}
 		
 		/// <summary>
@@ -70,7 +73,7 @@ namespace vitaShootingGUD
 			//GameEngine2Dでの描画処理
 			Director.Instance.Render ();
 			//UIの描画処理
-			//UISystem.Render();
+			UISystem.Render();
 			
 			//フレームバッファのスワップを行う
 			Director.Instance.GL.Context.SwapBuffers ();

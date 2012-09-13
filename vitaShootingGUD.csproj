@@ -53,7 +53,9 @@
     <Compile Include="Util\Const.cs" />
     <Compile Include="Entity\BulletFactory.cs" />
     <Compile Include="Entity\BulletEntity.cs" />
-    <Compile Include="Entity\HitTest.cs" />
+    <Compile Include="Util\HitTest.cs" />
+    <Compile Include="hpDialog.composer.cs" />
+    <Compile Include="hpDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />

@@ -14,18 +14,18 @@ namespace vitaShootingGUD
 		//奇数弾ベクトル
 		public float[] bulletAnglesKi = new float[]
 		{
-			FMath.PI*6/8,
-			FMath.PI*7/8,
+			FMath.PI*14f/18f,
+			FMath.PI*16f/18f,
 			FMath.PI,
-			-FMath.PI*7/8,
-			-FMath.PI*6/8,
+			-FMath.PI*16f/18f,
+			-FMath.PI*14f/18f,
 		};
 		
 		//偶数弾ベクトル
 		public float[] bulletAnglesGu = new float[]
 		{
-			FMath.PI*9/10,
-			-FMath.PI*9/10,
+			FMath.PI*17f/18f,
+			-FMath.PI*17f/18f,
 		};
 		
 		public Boss ()
@@ -38,7 +38,7 @@ namespace vitaShootingGUD
 		
 		BulletFactory bulletFactory = new BulletFactory();
 		
-		public Boss(Vector2 pos,string path) : base(pos,path)
+		public Boss(Vector2 pos,string path) : base(pos,path,96.0f)
 		{
 			new Vector2(pos.X,texture_info.TextureSizef.Y);
 			this.Position =new Vector2(pos.X,texture_info.TextureSizef.Y);
@@ -48,24 +48,20 @@ namespace vitaShootingGUD
 		//フレーム描画時に呼ばれるメソッド
 		public override void Tick(float dt)
 		{
-			try{
 			base.Tick (dt);
 			var pos = this.Position;
 			pos.Y += 3.3f * FMath.Sin (FrameCount * 0.015f);
 			this.Position=pos;
 			
-			if(FrameCount%20 == 0)
+			if(FrameCount%30f == 0)
 			{
 				bossPower = POWER.ONE;
 				shot ();
 			}
-			if(FrameCount%200 == 0)
+			if(FrameCount%400f == 0)
 			{
 				bossPower = POWER.TWO;
 				shot ();
-			}
-			}catch(Exception e){
-			Console.WriteLine(e.ToString());
 			}
 		}
 		
@@ -105,15 +101,35 @@ namespace vitaShootingGUD
 			switch(bossPower)
 			{
 			case POWER.ONE:
-				speed = 500;
+				speed = 300;
 				break;
 			case POWER.TWO:
 			case POWER.THREE:
 			default:
-				speed = 200;
+				speed = 100;
 				break;
 			}
 			return new Vector2(xVector/FMath.Sqrt(xVector*xVector + yVector*yVector)*speed,yVector/FMath.Sqrt(xVector*xVector + yVector*yVector)*speed);
+		}
+		
+		/// <summary>
+		/// ボスへのヒット判定
+		/// </summary>
+		/// <param name='owner'>
+		/// Owner.
+		/// </param>
+		public override void Hit (GameEntity owner)
+		{
+			base.Hit (owner);
+			
+			//衝突がプレイヤーのものだった場合
+			if(owner is PlayerBulletDefault)
+			{
+				this.RemoveChild(owner.Sprite,true);
+				Game.Instance.RemoveQueue.Add((BulletEntity)owner);
+				
+				Game.Instance.HpBar.EnemyHp -= 0.0005f;
+			}
 		}
 	}
 }

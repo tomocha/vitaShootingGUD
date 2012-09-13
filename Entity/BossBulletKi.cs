@@ -14,7 +14,7 @@ namespace vitaShootingGUD
 	public class BossBulletKi : BulletEntity
 	{
 		public BossBulletKi():base(Const.BOSS_BULLET_KI_PATH,1.0f){}
-		public BossBulletKi (Vector2 pos,Vector2 velocity):base(pos,Const.BOSS_BULLET_KI_PATH,1.0f)
+		public BossBulletKi (Vector2 pos,Vector2 velocity):base(pos,Const.BOSS_BULLET_KI_PATH,1.0f,10.0f)
 		{
 			this.Velocity = velocity;
 		}
